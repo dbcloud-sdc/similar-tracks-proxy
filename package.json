@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ZoundLoud/comment_section_proxy_kevin#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "http-proxy": "^1.17.0",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "react": "^16.8.2",

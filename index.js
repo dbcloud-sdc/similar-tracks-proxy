@@ -1,15 +1,30 @@
+const httpProxy = require('http-proxy');
 const express = require('express');
-const morgan = require('morgan');
+const http = require('http');
 const path = require('path');
-const app = express();
-const port = 3000;
+const server = express();
+// const port = 3001;
 
-app.use(morgan('dev'));
-app.use('/scripts',express.static(path.resolve(__dirname, 'node_modules')))
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/song/:songId',express.static(path.join(__dirname, 'public')));
+const proxy = httpProxy.createProxyServer({});
 
+server.use('/song/:songID', express.static(path.join(__dirname, '/public/')));
 
-app.listen(port, () => {
-  console.log(`server running at port ${port}`);
+server.get('/api/song/:songID/relatedtracks', (req, res) => {
+  // express.static(path.join(__dirname, 'public'));
+  console.log('related track request rcvd');
+  proxy.web(req, res, { target: `http://localhost:3000/` }); //this link will need to be configurable for deployment
 });
+
+//this server is listening on the below port
+server.listen(5050, () => {
+  console.log("listening on port 5050");
+});
+
+
+// Old node code:
+// server.use('/scripts',express.static(path.resolve(__dirname, 'node_modules')))
+// server.use(express.static(path.join(__dirname, 'public')));
+// server.use('/song/:songId',express.static(path.join(__dirname, 'public')));
+// server.listen(port, () => {
+//   console.log(`server running at port ${port}`);
+// });

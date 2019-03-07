@@ -11,7 +11,6 @@ server.use('/song/:songID', express.static(path.join(__dirname, '/public/')));
 
 server.get('/api/song/:songID/relatedtracks', (req, res) => {
   // express.static(path.join(__dirname, 'public'));
-  console.log('related track request rcvd');
   proxy.web(req, res, { target: `http://localhost:3000/` }); //this link will need to be configurable for deployment
 });
 

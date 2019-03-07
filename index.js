@@ -7,19 +7,12 @@ const server = express();
 
 const proxy = httpProxy.createProxyServer({});
 
-// Create your custom server and just call `proxy.web()` to proxy
-// a web request to the target passed in the options
-// also you can use `proxy.ws()` to proxy a websockets request
-
 server.use('/song/:songID', express.static(path.join(__dirname, '/public/')));
 
 server.get('/api/song/:songID/relatedtracks', (req, res) => {
   // express.static(path.join(__dirname, 'public'));
   console.log('related track request rcvd');
-  proxy.web(req, res, { target: `http://localhost:3000/` }); //this link gets sent to the actual location
-  // proxy.web(req, res, { target: `http://localhost:3000/song/${req.params.songID}` });
-  // proxy.web(req, res, { target: `http://localhost:3000/song/${req.params.songID}` });
-  // proxy.web(req, res, { target: `http://localhost:3000/song/${req.params.songID}` });
+  proxy.web(req, res, { target: `http://localhost:3000/` }); //this link will need to be configurable for deployment
 });
 
 //this server is listening on the below port

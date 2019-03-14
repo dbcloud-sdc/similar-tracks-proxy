@@ -8,24 +8,24 @@ const server = express();
 const proxy = httpProxy.createProxyServer({});
 
 server.get('/api/song/:songID/relatedtracks', (req, res) => {
-  proxy.web(req, res, { target: `http://172.31.87.163` }); //Related Tracks Private IP
+  proxy.web(req, res, { target: `172.31.87.163` }); //Related Tracks Private IP
 });
 
 server.get('/api/song/:songID/description', (req, res) => {
-  proxy.web(req, res, { target: `http://172.31.23.21` }); //Description Private IP
+  proxy.web(req, res, { target: `172.31.23.21` }); //Description Private IP
 });
 
-server.get('/api/song/:songID/TODO:', (req, res) => {
-  proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
+server.get('/api/song/:songID/comments', (req, res) => {
+  proxy.web(req, res, { target: `172.31.35.99` }); //Comments private IP
 });
 
-server.get('/api/song/:songID/TODO:', (req, res) => {
-  proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
-});
+// server.get('/api/song/:songID/TODO:', (req, res) => {
+//   proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
+// });
 
-server.get('/api/song/:songID/TODO:', (req, res) => {
-  proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
-});
+// server.get('/api/song/:songID/TODO:', (req, res) => {
+//   proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
+// });
 
 
 //this server is listening on the below port

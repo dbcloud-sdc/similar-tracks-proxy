@@ -1,18 +1,32 @@
+require('newrelic');
 const httpProxy = require('http-proxy');
 const express = require('express');
 const http = require('http');
 const path = require('path');
 const server = express();
-// const port = 3001;
 
 const proxy = httpProxy.createProxyServer({});
 
-server.use('/song/:songID', express.static(path.join(__dirname, '/public/')));
-
 server.get('/api/song/:songID/relatedtracks', (req, res) => {
-  // express.static(path.join(__dirname, 'public'));
-  proxy.web(req, res, { target: `http://localhost:3000/` }); //this link will need to be configurable for deployment
+  proxy.web(req, res, { target: `http://172.31.87.163` }); //Related Tracks Private IP
 });
+
+server.get('/api/song/:songID/description', (req, res) => {
+  proxy.web(req, res, { target: `http://172.31.23.21` }); //Description Private IP
+});
+
+server.get('/api/song/:songID/TODO:', (req, res) => {
+  proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
+});
+
+server.get('/api/song/:songID/TODO:', (req, res) => {
+  proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
+});
+
+server.get('/api/song/:songID/TODO:', (req, res) => {
+  proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
+});
+
 
 //this server is listening on the below port
 server.listen(5050, () => {
@@ -20,10 +34,9 @@ server.listen(5050, () => {
 });
 
 
-// Old node code:
-// server.use('/scripts',express.static(path.resolve(__dirname, 'node_modules')))
-// server.use(express.static(path.join(__dirname, 'public')));
-// server.use('/song/:songId',express.static(path.join(__dirname, 'public')));
-// server.listen(port, () => {
-//   console.log(`server running at port ${port}`);
-// });
+var uncaughterrors = 0;
+process.on('uncaughtException', function (err) {
+  // console.error(err.stack);
+  uncaughterrors++;
+  console.log(`uncaught errors: ${uncaughterrors}`);
+});

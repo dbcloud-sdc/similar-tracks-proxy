@@ -21,9 +21,9 @@ server.get('/api/song/:songID/comments', (req, res) => {
   proxy.web(req, res, { target: `172.31.35.99` }); //Comments private IP
 });
 
-// server.get('/api/song/:songID/TODO:', (req, res) => {
-//   proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
-// });
+server.get('/api/song/:songID/song/9000/api/song_id', (req, res) => {
+  proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
+});
 
 // server.get('/api/song/:songID/TODO:', (req, res) => {
 //   proxy.web(req, res, { target: `TODO:` }); //this link will need to be configurable for deployment
@@ -38,7 +38,7 @@ server.listen(5050, () => {
 
 var uncaughterrors = 0;
 process.on('uncaughtException', function (err) {
-  // console.error(err.stack);
+  console.error(err.stack);
   uncaughterrors++;
   console.log(`uncaught errors: ${uncaughterrors}`);
 });

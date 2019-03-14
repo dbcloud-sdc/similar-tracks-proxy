@@ -7,6 +7,8 @@ const server = express();
 
 const proxy = httpProxy.createProxyServer({});
 
+server.use('/song/:songID', express.static(path.join(__dirname, '../dist/')));
+
 server.get('/api/song/:songID/relatedtracks', (req, res) => {
   proxy.web(req, res, { target: `172.31.87.163` }); //Related Tracks Private IP
 });

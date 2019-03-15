@@ -14,7 +14,7 @@ server.get('/api/song/:songID/relatedtracks', (req, res) => {
 });
 
 server.get('/api/song/:songID/description', (req, res) => {
-  proxy.web(req, res, { target: `172.31.23.21` }); //Description Private IP
+  proxy.web(req, res, { target: `172.31.29.209` }); //Description Private IP
 });
 
 server.get('/api/song/:songID/comments', (req, res) => {
